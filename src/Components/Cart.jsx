@@ -31,49 +31,51 @@ const Cart = ({ toggleCart }) => {
                 exit="exit"
                 className="text-xl font-bold mb-4">Your Cart</motion.h1>
             {cartItems.length > 0 ? (
-                <ul className="space-y-2">
-                    {cartItems.map((item, index) => (
-                        <motion.li
-                            variants={itemVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            key={item.id}
-                            transition={{ duration: 0.3, delay: index * 0.1 }} // Staggering effect
-                            className="flex justify-between items-center border-b pb-2"
-                        >
-                            <div className="flex items-center">
-                                <img src={item.image} alt={item.title} className="w-16 h-16 object-cover mr-2" />
-                                <div>
-                                    <span className="block">{item.title}</span>
-                                    <div className="flex items-center mt-1">
-                                        <button
-                                            onClick={() => dispatch(decreaseAmount(item.id))}
-                                            className="bg-gray-300 px-2 py-1 rounded-l"
-                                        >
-                                            -
-                                        </button>
-                                        <span className="px-2">{item.quantity}</span>
-                                        <button
-                                            onClick={() => dispatch(increaseAmount(item.id))}
-                                            className="bg-gray-300 px-2 py-1 rounded-r"
-                                        >
-                                            +
-                                        </button>
+                <div className="space-y-2 max-h-[70vh] overflow-y-auto">
+                    <ul>
+                        {cartItems.map((item, index) => (
+                            <motion.li
+                                variants={itemVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                key={item.id}
+                                transition={{ duration: 0.3, delay: index * 0.1 }} // Staggering effect
+                                className="flex justify-between items-center border-b pb-2"
+                            >
+                                <div className="flex items-center">
+                                    <img src={item.image} alt={item.title} className="w-16 h-16 object-cover mr-2" />
+                                    <div>
+                                        <span className="block">{item.title}</span>
+                                        <div className="flex items-center mt-1">
+                                            <button
+                                                onClick={() => dispatch(decreaseAmount(item.id))}
+                                                className="bg-gray-300 px-2 py-1 rounded-l"
+                                            >
+                                                -
+                                            </button>
+                                            <span className="px-2">{item.quantity}</span>
+                                            <button
+                                                onClick={() => dispatch(increaseAmount(item.id))}
+                                                className="bg-gray-300 px-2 py-1 rounded-r"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <span>${item.totalPrice.toFixed(2)}</span>
-                                <button
-                                    onClick={() => dispatch(removeFromCart(item.id))}
-                                    className="ml-2 text-red-500"
-                                >
-                                    Remove
-                                </button>
-                            </div>
-                        </motion.li>
-                    ))}
+                                <div>
+                                    <span>${item.totalPrice.toFixed(2)}</span>
+                                    <button
+                                        onClick={() => dispatch(removeFromCart(item.id))}
+                                        className="ml-2 text-red-500"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </motion.li>
+                        ))}
+                    </ul>
                     <motion.button
                         variants={FadeLeftAdv(0.3)}
                         initial="hidden"
@@ -84,7 +86,7 @@ const Cart = ({ toggleCart }) => {
                     >
                         Clear Cart
                     </motion.button>
-                </ul>
+                </div>
             ) : (
                 <motion.p
                     variants={FadeLeftAdv(0.3)}
